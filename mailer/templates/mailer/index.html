@@ -1,9 +1,14 @@
 {% extends 'mailer/base.html' %}
+
+{% block title %}Главная{% endblock %}
+
 {% block content %}
-  <h2>Статистика</h2>
-  <ul>
-    <li>Всего рассылок: {{ total_mailings }}</li>
-    <li>Активных ('Запущена'): {{ active_mailings }}</li>
-    <li>Уникальных получателей: {{ unique_recipients }}</li>
-  </ul>
+<h1>Статистика сервиса</h1>
+
+<ul class="list-group mt-3">
+    <li class="list-group-item">Всего рассылок: {{ total_mailings }}</li>
+    <li class="list-group-item">Активных рассылок: {{ active_mailings }}</li>
+    <li class="list-group-item">Уникальных получателей: {{ unique_recipients }}</li>
+</ul>
+
 {% endblock %}

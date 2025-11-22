@@ -1,16 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'mailer/base.html' %}
+
+{% block title %}Сообщение{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>Сообщение: {{ object.subject }}</h2>
+<h2>{{ object.subject }}</h2>
 
-    <p><strong>Тема:</strong> {{ object.subject }}</p>
-    <p><strong>Текст:</strong></p>
-    <div class="border p-3">{{ object.body|linebreaks }}</div>
+<p>{{ object.body }}</p>
 
-    <hr>
-    <a href="{% url 'mailer:message_update' object.pk %}" class="btn btn-warning">Редактировать</a>
-    <a href="{% url 'mailer:message_delete' object.pk %}" class="btn btn-danger">Удалить</a>
-    <a href="{% url 'mailer:message_list' %}" class="btn btn-secondary">Назад</a>
-</div>
+<a href="{% url 'mailer:message_update' object.id %}" class="btn btn-warning">Редактировать</a>
+<a href="{% url 'mailer:message_delete' object.id %}" class="btn btn-danger">Удалить</a>
+<a href="{% url 'mailer:message_list' %}" class="btn btn-secondary">Назад</a>
+
 {% endblock %}

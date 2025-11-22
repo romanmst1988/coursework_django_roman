@@ -1,12 +1,36 @@
 {% extends 'mailer/base.html' %}
+
+{% block title %}Получатели{% endblock %}
+
 {% block content %}
-<h2>Получатели</h2>
-<a href="{% url 'mailer:recipient_add' %}">Добавить</a>
-<ul>
-{% for obj in object_list %}
-  <li>{{ obj.email }} — <a href="{% url 'mailer:recipient_edit' obj.pk %}">ред.</a> <a href="{% url 'mailer:recipient_delete' obj.pk %}">удал.</a></li>
-{% empty %}
-  <li>Пусто</li>
-{% endfor %}
-</ul>
+<h1>Получатели</h1>
+
+<a href="{% url 'mailer:recipient_create' %}" class="btn btn-primary mb-3">Добавить получателя</a>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Email</th>
+        <th>ФИО</th>
+        <th>Комментарий</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for r in object_list %}
+        <tr>
+            <td>{{ r.email }}</td>
+            <td>{{ r.full_name }}</td>
+            <td>{{ r.comment }}</td>
+            <td>
+                <a href="{% url 'mailer:recipient_update' r.id %}" class="btn btn-warning btn-sm">Редактировать</a>
+                <a href="{% url 'mailer:recipient_delete' r.id %}" class="btn btn-danger btn-sm">Удалить</a>
+            </td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="4">Получателей нет</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}

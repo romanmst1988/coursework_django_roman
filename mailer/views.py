@@ -10,6 +10,110 @@ from django.utils.decorators import method_decorator
 from .models import Recipient, Message, Mailing, SendAttempt
 from .forms import RecipientForm, MessageForm, MailingForm
 
+from django.views import generic
+from django.urls import reverse_lazy
+from django.db.models import Count
+from django.utils import timezone
+
+from .models import Recipient, Message, Mailing, SendAttempt
+from .forms import RecipientForm, MessageForm, MailingForm
+
+# --------------------
+# Index / Dashboard
+# --------------------
+class IndexView(generic.TemplateView):
+    template_name = 'mailer/index.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['total_mailings'] = Mailing.objects.count()
+        ctx['active_mailings'] = Mailing.objects.filter(status=Mailing.STATUS_RUNNING).count()
+        ctx['unique_recipients'] = Recipient.objects.count()
+        return ctx
+
+# --------------------
+# Recipient CBV (если нужны)
+# --------------------
+class RecipientListView(generic.ListView):
+    model = Recipient
+    template_name = 'mailer/recipient_list.html'
+
+class RecipientCreateView(generic.CreateView):
+    model = Recipient
+    form_class = RecipientForm
+    template_name = 'mailer/recipient_form.html'
+    success_url = reverse_lazy('mailer:recipient_list')
+
+class RecipientUpdateView(generic.UpdateView):
+    model = Recipient
+    form_class = RecipientForm
+    template_name = 'mailer/recipient_form.html'
+    success_url = reverse_lazy('mailer:recipient_list')
+
+class RecipientDeleteView(generic.DeleteView):
+    model = Recipient
+    template_name = 'mailer/recipient_confirm_delete.html'
+    success_url = reverse_lazy('mailer:recipient_list')
+
+# --------------------
+# Message CBV (обязательные — добавлены/исправлены)
+# --------------------
+class MessageListView(generic.ListView):
+    model = Message
+    template_name = 'mailer/message_list.html'
+    context_object_name = 'object_list'  # по умолчанию уже object_list
+
+class MessageCreateView(generic.CreateView):
+    model = Message
+    form_class = MessageForm
+    template_name = 'mailer/message_form.html'
+    success_url = reverse_lazy('mailer:message_list')
+
+class MessageDetailView(generic.DetailView):
+    model = Message
+    template_name = 'mailer/message_detail.html'
+    context_object_name = 'object'
+
+class MessageUpdateView(generic.UpdateView):
+    model = Message
+    form_class = MessageForm
+    template_name = 'mailer/message_form.html'
+    success_url = reverse_lazy('mailer:message_list')
+
+class MessageDeleteView(generic.DeleteView):
+    model = Message
+    template_name = 'mailer/message_confirm_delete.html'
+    success_url = reverse_lazy('mailer:message_list')
+
+# --------------------
+# Mailing CBV
+# --------------------
+class MailingListView(generic.ListView):
+    model = Mailing
+    template_name = 'mailer/mailing_list.html'
+
+class MailingCreateView(generic.CreateView):
+    model = Mailing
+    form_class = MailingForm
+    template_name = 'mailer/mailing_form.html'
+    success_url = reverse_lazy('mailer:mailing_list')
+
+class MailingDetailView(generic.DetailView):
+    model = Mailing
+    template_name = 'mailer/mailing_detail.html'
+
+class MailingUpdateView(generic.UpdateView):
+    model = Mailing
+    form_class = MailingForm
+    template_name = 'mailer/mailing_form.html'
+    success_url = reverse_lazy('mailer:mailing_list')
+
+class MailingDeleteView(generic.DeleteView):
+    model = Mailing
+    template_name = 'mailer/mailing_confirm_delete.html'
+    success_url = reverse_lazy('mailer:mailing_list')
+
+
 @method_decorator(cache_page(60), name='dispatch')  # кеш на 60 секунд
 class IndexView(generic.TemplateView):
     template_name = 'mailer/index.html'
