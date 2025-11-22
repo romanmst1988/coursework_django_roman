@@ -1,0 +1,16 @@
+{% extends 'mailer/base.html' %}
+{% block title %}Профиль{% endblock %}
+{% block content %}
+<h2>Профиль пользователя {{ user.email }}</h2>
+<p>Имя: {{ user.first_name }} {{ user.last_name }}</p>
+<p>Email: {{ user.email }}</p>
+<p>Телефон: {{ user.phone }}</p>
+<p>Страна: {{ user.country }}</p>
+
+<h3>Редактировать профиль</h3>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить изменения</button>
+</form>
+{% endblock %}

@@ -38,7 +38,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "mailer",
+    "users",
+    "mailings",
 ]
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 # Для разработки: письма в консоль
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
