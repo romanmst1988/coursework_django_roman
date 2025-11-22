@@ -27,7 +27,7 @@ class IndexView(generic.TemplateView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['total_mailings'] = Mailing.objects.count()
-        ctx['active_mailings'] = Mailing.objects.filter(status=Mailing.STATUS_RUNNING).count()
+        ctx['active_mailings'] = Mailing.objects.filter(status='Запущена').count()
         ctx['unique_recipients'] = Recipient.objects.count()
         return ctx
 
