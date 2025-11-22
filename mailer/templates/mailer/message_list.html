@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Список сообщений</h1>
+
+<ul>
+    {% for message in object_list %}
+        <li>{{ message.subject }} — {{ message.created_at }}</li>
+    {% empty %}
+        <li>Сообщений нет</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
