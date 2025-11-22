@@ -1,14 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Список сообщений</h1>
+<div class="container mt-4">
+    <h2>Список сообщений</h2>
+    <a href="{% url 'mailer:message_create' %}" class="btn btn-primary mb-3">Создать сообщение</a>
 
-<ul>
-    {% for message in object_list %}
-        <li>{{ message.subject }} — {{ message.created_at }}</li>
-    {% empty %}
-        <li>Сообщений нет</li>
-    {% endfor %}
-</ul>
-
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Тема</th>
+            <th>Создано</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for message in object_list %}
+            <tr>
+                <td>{{ message.subject }}</td>
+                <td>{{ message.created_at }}</td>
+                <td>
+                    <a href="{% url 'mailer:message_detail' message.pk %}" class="btn btn-sm btn-info">Просмотр</a>
+                    <a href="{% url 'mailer:message_update' message.pk %}" class="btn btn-sm btn-warning">Изменить</a>
+                    <a href="{% url 'mailer:message_delete' message.pk %}" class="btn btn-sm btn-danger">Удалить</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="3">Сообщений нет</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
