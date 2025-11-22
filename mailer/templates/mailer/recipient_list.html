@@ -1,0 +1,12 @@
+{% extends 'mailer/base.html' %}
+{% block content %}
+<h2>Получатели</h2>
+<a href="{% url 'mailer:recipient_add' %}">Добавить</a>
+<ul>
+{% for obj in object_list %}
+  <li>{{ obj.email }} — <a href="{% url 'mailer:recipient_edit' obj.pk %}">ред.</a> <a href="{% url 'mailer:recipient_delete' obj.pk %}">удал.</a></li>
+{% empty %}
+  <li>Пусто</li>
+{% endfor %}
+</ul>
+{% endblock %}
