@@ -1,0 +1,11 @@
+{% extends 'mailer/base.html' %}
+
+{% block content %}
+<h3>Удалить получателя {{ object.email }}?</h3>
+
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Удалить</button>
+    <a class="btn btn-secondary" href="{% url 'mailer:recipient_list' %}">Отмена</a>
+</form>
+{% endblock %}
