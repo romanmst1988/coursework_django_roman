@@ -77,8 +77,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "mailing_project.wsgi.application"
 
-LOGIN_REDIRECT_URL = "index"     # после входа
-LOGOUT_REDIRECT_URL = "index"  # после выхода
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
+LOGIN_URL = 'users:login'
 
 
 # Database

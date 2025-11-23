@@ -1,15 +1,20 @@
+# mailing_project/urls.py
 from django.contrib import admin
 from django.urls import path, include
-
-from mailer import views
-
+from mailer.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('mailer.urls', namespace='mailer')),
-    path('', include('mailer.urls')),
-    path('', include('mailings.urls')),
-    path('', include('users.urls')),
-    path('users/', include('users.urls')),
-    path('', views.index, name='mailer.index')  # type: ignore
+
+    # Главная страница
+    path('', index, name='index'),
+
+    # Пользователи
+    path('users/', include('users.urls', namespace='users')),
+
+    # Mailings
+    path('mailings/', include('mailings.urls', namespace='mailings')),
+
+    # Старое приложение mailer
+    path('messages/', include('mailer.urls', namespace='mailer')),
 ]
