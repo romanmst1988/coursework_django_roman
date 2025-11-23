@@ -5,15 +5,27 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
 
 def register_view(request):
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST, request.FILES)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('index')
-    else:
-        form = CustomUserCreationForm()
-    return render(request, 'users/register.html', {'form': form})
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        username = email  # обязательное поле
+        first_name = request.POST.get("first_name")
+        phone_number = request.POST.get("phone_number")
+        country = request.POST.get("country")
+
+        user = CustomUser.objects.create_user(
+            email=email,
+            username=username,
+            password=password,
+            first_name=first_name,
+            phone_number=phone_number,
+            country=country
+        )
+
+        login(request, user)
+        return redirect('index')  # главная после регистрации
+
+    return render(request, "users/register.html")
 
 def login_view(request):
     if request.method == 'POST':
