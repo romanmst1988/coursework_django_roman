@@ -1,8 +1,8 @@
 # для кеширования
-from django.shortcuts import render
+from django.shortcuts import render  # type: ignore
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views import generic
+from django.views import generic  # type: ignore
 from django.views.decorators.cache import cache_page
 
 from .forms import MailingForm, MessageForm, RecipientForm
@@ -112,7 +112,7 @@ class MailingDeleteView(generic.DeleteView):
 
 
 @method_decorator(cache_page(60), name="dispatch")  # кеш на 60 секунд
-class IndexView(generic.TemplateView):
+class IndexView(generic.TemplateView):  # type: ignore
     template_name = "mailer/index.html"
 
     def get_context_data(self, **kwargs):
@@ -126,70 +126,70 @@ class IndexView(generic.TemplateView):
 
 
 # Recipients
-class RecipientListView(generic.ListView):
+class RecipientListView(generic.ListView):  # type: ignore
     model = Recipient
 
 
-class RecipientCreateView(generic.CreateView):
-    model = Recipient
-    form_class = RecipientForm
-    success_url = reverse_lazy("mailer:recipient_list")
-
-
-class RecipientUpdateView(generic.UpdateView):
+class RecipientCreateView(generic.CreateView):  # type: ignore
     model = Recipient
     form_class = RecipientForm
     success_url = reverse_lazy("mailer:recipient_list")
 
 
-class RecipientDeleteView(generic.DeleteView):
+class RecipientUpdateView(generic.UpdateView):  # type: ignore
+    model = Recipient
+    form_class = RecipientForm
+    success_url = reverse_lazy("mailer:recipient_list")
+
+
+class RecipientDeleteView(generic.DeleteView):  # type: ignore
     model = Recipient
     success_url = reverse_lazy("mailer:recipient_list")
 
 
 # Messages
-class MessageListView(generic.ListView):
+class MessageListView(generic.ListView):  # type: ignore
     model = Message
 
 
-class MessageCreateView(generic.CreateView):
-    model = Message
-    form_class = MessageForm
-    success_url = reverse_lazy("mailer:message_list")
-
-
-class MessageUpdateView(generic.UpdateView):
+class MessageCreateView(generic.CreateView):  # type: ignore
     model = Message
     form_class = MessageForm
     success_url = reverse_lazy("mailer:message_list")
 
 
-class MessageDeleteView(generic.DeleteView):
+class MessageUpdateView(generic.UpdateView):  # type: ignore
+    model = Message
+    form_class = MessageForm
+    success_url = reverse_lazy("mailer:message_list")
+
+
+class MessageDeleteView(generic.DeleteView):  # type: ignore
     model = Message
     success_url = reverse_lazy("mailer:message_list")
 
 
 # Mailings
-class MailingListView(generic.ListView):
+class MailingListView(generic.ListView):  # type: ignore
     model = Mailing
 
 
-class MailingCreateView(generic.CreateView):
-    model = Mailing
-    form_class = MailingForm
-    success_url = reverse_lazy("mailer:mailing_list")
-
-
-class MailingUpdateView(generic.UpdateView):
+class MailingCreateView(generic.CreateView):  # type: ignore
     model = Mailing
     form_class = MailingForm
     success_url = reverse_lazy("mailer:mailing_list")
 
 
-class MailingDeleteView(generic.DeleteView):
+class MailingUpdateView(generic.UpdateView):  # type: ignore
+    model = Mailing
+    form_class = MailingForm
+    success_url = reverse_lazy("mailer:mailing_list")
+
+
+class MailingDeleteView(generic.DeleteView):  # type: ignore
     model = Mailing
     success_url = reverse_lazy("mailer:mailing_list")
 
 
-class MailingDetailView(generic.DetailView):
+class MailingDetailView(generic.DetailView):  # type: ignore
     model = Mailing
