@@ -18,6 +18,11 @@ from django.utils import timezone
 from .models import Recipient, Message, Mailing, SendAttempt
 from .forms import RecipientForm, MessageForm, MailingForm
 
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'mailer/index.html')
+
 # --------------------
 # Index / Dashboard
 # --------------------
