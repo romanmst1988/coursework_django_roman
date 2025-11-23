@@ -6,17 +6,16 @@ from .models import Mailing, Message, Recipient
 class RecipientForm(forms.ModelForm):
     class Meta:
         model = Recipient
-        fields = ["email", "full_name", "comment"]
+        fields = "__all__"
 
 
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
-        fields = ["subject", "body"]
+        fields = "__all__"
 
 
 class MailingForm(forms.ModelForm):
     class Meta:
         model = Mailing
-        fields = ["start_at", "end_at", "status", "message", "recipients"]
-        widgets = {"recipients": forms.CheckboxSelectMultiple}
+        fields = "__all__"

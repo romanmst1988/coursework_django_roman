@@ -1,0 +1,19 @@
+{% extends 'mailer/base.html' %}
+{% block title %}Рассылки{% endblock %}
+{% block content %}
+<h2>Список рассылок</h2>
+<a href="{% url 'mailings:create' %}">Создать рассылку</a>
+<ul>
+    {% for mailing in mailings %}
+        <li>
+            <strong>{{ mailing.message.subject }}</strong>
+            (Статус: {{ mailing.status }})
+            <p>Срок: {{ mailing.start_time }} - {{ mailing.end_time }}</p>
+            <a href="{% url 'mailings:update' mailing.id %}">Изменить</a>
+            <a href="{% url 'mailings:delete' mailing.id %}">Удалить</a>
+        </li>
+    {% empty %}
+        <li>Рассылок пока нет.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
