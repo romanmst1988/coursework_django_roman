@@ -1,5 +1,6 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
+
 
 class Recipient(models.Model):
     email = models.EmailField(unique=True)
@@ -15,6 +16,7 @@ class Recipient(models.Model):
     def __str__(self):
         return self.email
 
+
 class Message(models.Model):
     subject = models.CharField(max_length=255)
     body = models.TextField()
@@ -28,11 +30,12 @@ class Message(models.Model):
     def __str__(self):
         return self.subject
 
+
 class Mailing(models.Model):
     STATUS_CHOICES = [
-        ('Created', 'Created'),
-        ('Running', 'Running'),
-        ('Finished', 'Finished'),
+        ("Created", "Created"),
+        ("Running", "Running"),
+        ("Finished", "Finished"),
     ]
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
@@ -49,10 +52,11 @@ class Mailing(models.Model):
     def __str__(self):
         return f"Mailing {self.id} - {self.status}"
 
+
 class MailingAttempt(models.Model):
     STATUS_CHOICES = [
-        ('Success', 'Success'),
-        ('Failed', 'Failed'),
+        ("Success", "Success"),
+        ("Failed", "Failed"),
     ]
     mailing = models.ForeignKey(Mailing, on_delete=models.CASCADE)
     attempt_time = models.DateTimeField(auto_now_add=True)

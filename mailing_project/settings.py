@@ -42,11 +42,11 @@ INSTALLED_APPS = [
     "mailings",
 ]
 
-AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_USER_MODEL = "users.CustomUser"
 
 # Для разработки: письма в консоль
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'noreply@example.com'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+DEFAULT_FROM_EMAIL = "noreply@example.com"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -63,7 +63,7 @@ ROOT_URLCONF = "mailing_project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates'],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -77,9 +77,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "mailing_project.wsgi.application"
 
-LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = 'index'
-LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = "index"
+LOGOUT_REDIRECT_URL = "index"
+LOGIN_URL = "users:login"
 
 
 # Database
@@ -113,9 +113,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Простое кеширование в памяти (для разработки)
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake',
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "unique-snowflake",
     }
 }
 
